@@ -12,3 +12,7 @@ Install the dependencies and start the development:
 npm install
 npm run dev
 ```
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT) License © 2023 [Krisantus Wanandi](https://github.com/krisantuswanandi)
