@@ -11,7 +11,13 @@ onMounted(() => {
 const { copy, copied } = useClipboard()
 
 function copyUrl() {
-  copy(`${location.host}/#${utoa(code.value)}`)
+  let url = `${location.origin}/#${utoa(code.value)}`
+
+  if (shortHash.value) {
+    url = shortUrl.value
+  }
+
+  copy(url)
 }
 
 const shortHash = ref("")
@@ -49,7 +55,7 @@ function update(event: Event) {
 <template>
   <div>
     <div>
-      <button @click="copyUrl()">
+      <button @click="copyUrl">
         <span v-if="!copied">Copy URL</span>
         <span v-else>Copied!</span>
       </button>
