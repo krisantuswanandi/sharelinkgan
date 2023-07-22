@@ -8,12 +8,15 @@ or `Share Link Gan!` is where you paste your code and just share the link (becau
 
 Built with [Nuxt 3](https://nuxt.com). Click [here](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-Install the dependencies and start the development:
+Copy `.env.example` file into `.env` and fill the variables.
 
-```bash
-npm install
-npm run dev
-```
+Create a new database on [PlanetScale](https://planetscale.com/) and fill the database env variables with your credentials.
+
+Install proejct dependencies by running `npm install`.
+
+Update your database schema by running `npm run db:push`.
+
+Finally, start the dev server by running `npm run dev`.
 
 ## License
 
