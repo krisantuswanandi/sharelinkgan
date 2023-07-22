@@ -11,10 +11,22 @@ const update = useDebounceFn(() => {
 }, 500)
 
 watch(code, update)
+
+const { copy, copied } = useClipboard()
+
+function copyUrl() {
+  copy(`${location.host}/#${utoa(code.value)}`)
+}
 </script>
 
 <template>
   <div>
+    <div>
+      <button @click="copyUrl()">
+        <span v-if="!copied">Copy URL</span>
+        <span v-else>Copied!</span>
+      </button>
+    </div>
     <textarea v-model="code" cols="100" rows="25" />
   </div>
 </template>
