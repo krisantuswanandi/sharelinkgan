@@ -56,15 +56,16 @@ function update(event: Event) {
 
 <template>
   <div>
-    <div>
-      <img src="/logo.svg" alt="Sharelinkgan" width="75">
+    <div class="flex items-center mb-2">
+      <img src="/logo.svg" alt="Sharelinkgan" class="w-10 mr-1">
+      <span class="text-xl font-bold">Sharelinkgan</span>
     </div>
-    <div>
-      <button @click="copyUrl">
+    <div class="mb-2">
+      <button @click="copyUrl" class="mr-1">
         <span v-if="!copied">Copy URL</span>
         <span v-else>Copied!</span>
       </button>
-      <button @click="shorten" :disabled="canShorten">
+      <button @click="shorten" :disabled="canShorten" class="mr-1">
         Shorten URL
       </button>
       <span v-if="shortHash">
