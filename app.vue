@@ -2,20 +2,47 @@
 const router = useRouter()
 const route = useRoute()
 
-const initialCode = atou(route.hash.slice(1))
-const code = ref(initialCode)
+const code = ref("")
 
-const update = useDebounceFn(() => {
-  const hash = "#" + utoa(code.value)
-  router.push({ hash })
-}, 500)
-
-watch(code, update)
+onMounted(() => {
+  code.value = atou(route.hash.slice(1))
+})
 
 const { copy, copied } = useClipboard()
 
 function copyUrl() {
   copy(`${location.host}/#${utoa(code.value)}`)
+}
+
+const shortHash = ref("")
+const shortUrl = computed(() => {
+  return `${location.origin}/s/${shortHash.value}`
+})
+const canShorten = computed(() => !code.value.trim() && !shortHash.value)
+
+async function shorten() {
+  const { data } = await useFetch<{ hash: string }>("/api/urls", {
+    method: "post",
+    body: {
+      hash: utoa(code.value),
+    }
+  })
+
+  if (data.value) {
+    shortHash.value = data.value.hash
+  }
+}
+
+const updateUrl = useDebounceFn((text: string) => {
+  const hash = "#" + utoa(text)
+  router.push({ hash })
+}, 500)
+
+function update(event: Event) {
+  const el = event.target as HTMLTextAreaElement
+  code.value = el.value
+  shortHash.value = ""
+  updateUrl(el.value)
 }
 </script>
 
@@ -26,7 +53,13 @@ function copyUrl() {
         <span v-if="!copied">Copy URL</span>
         <span v-else>Copied!</span>
       </button>
+      <button @click="shorten" :disabled="canShorten">
+        Shorten URL
+      </button>
+      <span v-if="shortHash">
+        <NuxtLink :to="shortUrl">{{ shortUrl }}</NuxtLink>
+      </span>
     </div>
-    <textarea v-model="code" cols="100" rows="25" />
+    <textarea :value="code" cols="100" rows="25" @input="update" />
   </div>
 </template>

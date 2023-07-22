@@ -14,6 +14,9 @@ dependencies:
   fflate:
     specifier: ^0.8.0
     version: 0.8.0
+  nanoid:
+    specifier: ^4.0.2
+    version: 4.0.2
 
 devDependencies:
   '@nuxt/devtools':
@@ -4919,7 +4922,6 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
-    dev: true
 
   /negotiator@0.6.3:
     resolution: {integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==}
