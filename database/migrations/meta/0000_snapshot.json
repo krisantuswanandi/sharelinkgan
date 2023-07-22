@@ -1,0 +1,51 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "id": "a9e60386-e266-4f95-a43f-f1fdd490b022",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "url": {
+      "name": "url",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "hash": {
+          "name": "hash",
+          "type": "varchar(10)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "original": {
+          "name": "original",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "url_hash_unique": {
+          "name": "url_hash_unique",
+          "columns": [
+            "hash"
+          ]
+        }
+      }
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}
