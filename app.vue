@@ -2,6 +2,8 @@
 const router = useRouter()
 const route = useRoute()
 
+useHead({ title: "Sharelinkgan" })
+
 const code = ref("")
 
 onMounted(() => {
@@ -54,6 +56,9 @@ function update(event: Event) {
 
 <template>
   <div>
+    <div>
+      <img src="/logo.svg" alt="Sharelinkgan" width="75">
+    </div>
     <div>
       <button @click="copyUrl">
         <span v-if="!copied">Copy URL</span>

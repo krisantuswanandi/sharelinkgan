@@ -1,3 +1,5 @@
+<img src="./public/logo.svg" alt="Sharelinkgan" width="75" />
+
 # Sharelinkgan
 
 or `Share Link Gan!` is where you paste your code and just share the link (because sharing is caring :wink:).
