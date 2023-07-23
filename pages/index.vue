@@ -89,11 +89,13 @@ function update(event: Event) {
       </div>
       <div class="w-96">
         <div class="pl-6 font-bold">Saved Urls</div>
-        <ul>
-          <li v-for="hash in savedHashes">
-            <NuxtLink :to="getShortUrl(hash)">{{ getShortUrl(hash) }}</NuxtLink>
-          </li>
-        </ul>
+        <ClientOnly>
+          <ul>
+            <li v-for="hash in savedHashes">
+              <NuxtLink :to="getShortUrl(hash)">{{ getShortUrl(hash) }}</NuxtLink>
+            </li>
+          </ul>
+        </ClientOnly>
       </div>
     </div>
   </div>
