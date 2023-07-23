@@ -19,6 +19,9 @@ dependencies:
     version: 4.0.2
 
 devDependencies:
+  '@iconify/json':
+    specifier: ^2.2.93
+    version: 2.2.93
   '@nuxt/devtools':
     specifier: latest
     version: 0.7.0(nuxt@3.6.5)(vite@4.4.6)
@@ -803,6 +806,13 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
+    dev: true
+
+  /@iconify/json@2.2.93:
+    resolution: {integrity: sha512-gEC9TmJbd96CzJzl0TOYCGWhiHFalHRfhqi+xkVl3uOMWH6l15iVeL7tRiPdY/q5hxYfSva36XbqlDyKFyWCPw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.1
     dev: true
 
   /@iconify/types@2.0.0:
