@@ -26,11 +26,17 @@ function copyUrl() {
   copy(url)
 }
 
+const savedHashes = useLocalStorage<string[]>("sharelinkgan", [])
+
 const shortHash = ref("")
 const shortUrl = computed(() => {
-  return `${location.origin}/s/${shortHash.value}`
+  return getShortUrl(shortHash.value)
 })
 const canShorten = computed(() => !code.value.trim() && !shortHash.value)
+
+function getShortUrl(hash: string) {
+  return `${location.origin}/s/${hash}`
+}
 
 async function shorten() {
   const { data } = await useFetch<{ hash: string }>("/api/urls", {
@@ -42,6 +48,7 @@ async function shorten() {
 
   if (data.value) {
     shortHash.value = data.value.hash
+    savedHashes.value.push(data.value.hash)
   }
 }
 
@@ -64,18 +71,30 @@ function update(event: Event) {
       <img src="/logo.svg" alt="Sharelinkgan" class="w-10 mr-1">
       <span class="text-xl font-bold">Sharelinkgan</span>
     </div>
-    <div class="mb-2">
-      <button @click="copyUrl" class="mr-1">
-        <span v-if="!copied">Copy URL</span>
-        <span v-else>Copied!</span>
-      </button>
-      <button @click="shorten" :disabled="canShorten" class="mr-1">
-        Shorten URL
-      </button>
-      <span v-if="shortHash">
-        <NuxtLink :to="shortUrl">{{ shortUrl }}</NuxtLink>
-      </span>
+    <div class="flex">
+      <div class="flex-1">
+        <div class="mb-2">
+          <button @click="copyUrl" class="mr-1">
+            <span v-if="!copied">Copy URL</span>
+            <span v-else>Copied!</span>
+          </button>
+          <button @click="shorten" :disabled="canShorten" class="mr-1">
+            Shorten URL
+          </button>
+          <span v-if="shortHash">
+            <NuxtLink :to="shortUrl">{{ shortUrl }}</NuxtLink>
+          </span>
+        </div>
+        <textarea :value="code" @input="update" class="w-full h-xl" />
+      </div>
+      <div class="w-96">
+        <div class="pl-6 font-bold">Saved Urls</div>
+        <ul>
+          <li v-for="hash in savedHashes">
+            <NuxtLink :to="getShortUrl(hash)">{{ getShortUrl(hash) }}</NuxtLink>
+          </li>
+        </ul>
+      </div>
     </div>
-    <textarea :value="code" cols="100" rows="25" @input="update" />
   </div>
 </template>
