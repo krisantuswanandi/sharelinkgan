@@ -48,7 +48,7 @@ async function shorten() {
 
   if (data.value) {
     shortHash.value = data.value.hash
-    savedHashes.value.push(data.value.hash)
+    savedHashes.value.unshift(data.value.hash)
   }
 }
 
