@@ -8,6 +8,9 @@ dependencies:
   '@planetscale/database':
     specifier: ^1.8.0
     version: 1.8.0
+  '@vercel/analytics':
+    specifier: ^1.0.1
+    version: 1.0.1
   drizzle-orm:
     specifier: ^0.27.2
     version: 0.27.2(@planetscale/database@1.8.0)
@@ -1744,6 +1747,10 @@ packages:
     transitivePeerDependencies:
       - rollup
     dev: true
+
+  /@vercel/analytics@1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
+    dev: false
 
   /@vercel/nft@0.22.6:
     resolution: {integrity: sha512-gTsFnnT4mGxodr4AUlW3/urY+8JKKB452LwF3m477RFUJTAaDmcz2JqFuInzvdybYIeyIv1sSONEJxsxnbQ5JQ==}
