@@ -1,4 +1,10 @@
-import { defineConfig, presetUno, presetIcons, presetWebFonts } from "unocss";
+import {
+  defineConfig,
+  presetUno,
+  presetIcons,
+  presetWebFonts,
+  transformerDirectives,
+} from "unocss";
 
 export default defineConfig({
   presets: [
@@ -15,4 +21,5 @@ export default defineConfig({
       },
     }),
   ],
+  transformers: [transformerDirectives()],
 });

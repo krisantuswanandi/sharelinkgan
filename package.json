@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@planetscale/database": "^1.8.0",
+    "@unocss/reset": "^0.53.6",
     "@vercel/analytics": "^1.0.1",
     "drizzle-orm": "^0.27.2",
     "fflate": "^0.8.0",

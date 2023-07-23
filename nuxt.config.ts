@@ -7,5 +7,6 @@ export default defineNuxtConfig({
     databaseHost: "",
     databaseUsername: "",
     databasePassword: "",
-  }
+  },
+  css: ["@unocss/reset/tailwind.css"],
 });
