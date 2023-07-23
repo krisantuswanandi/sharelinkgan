@@ -7,7 +7,11 @@ useHead({ title: "Sharelinkgan" })
 const code = ref("")
 
 onMounted(() => {
-  code.value = atou(route.hash.slice(1))
+  try {
+    code.value = atou(route.hash.slice(1))
+  } catch {
+    router.push("")
+  }
 })
 
 const { copy, copied } = useClipboard()
