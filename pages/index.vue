@@ -15,6 +15,7 @@ onMounted(() => {
 })
 
 const { copy, copied } = useClipboard()
+const { copy: copyCode, copied: codeCopied } = useClipboard({ source: code })
 
 function copyUrl() {
   let url = `${location.origin}/#${utoa(code.value)}`
@@ -69,7 +70,7 @@ const sidebarOpen = ref(false)
 
 <template>
   <div class="flex flex-col h-full">
-    <navbar class="flex justify-between items-center px-4 py-2 bg-neutral-900 border-b border-neutral-700/70">
+    <navbar class="flex justify-between items-center px-4 py-3 bg-neutral-900 border-b border-neutral-700/70">
       <div class="flex items-center">
         <img src="/logo.svg" alt="Sharelinkgan" class="w-8 mr-2 p-0.5 bg-gray-400 rounded-full">
         <span class="text-sm text-neutral-400">Sharelinkgan</span>
@@ -85,18 +86,23 @@ const sidebarOpen = ref(false)
     </navbar>
     <div class="flex flex-1">
       <div class="flex-1 relative">
-        <div class="absolute top-0 right-0 p-4">
+        <div class="absolute top-0 right-0 p-4 flex">
+          <button @click="copyCode()" title="Copy source code"
+            class="w-10 h-10 flex justify-center items-center text-lg text-neutral-400 bg-[#1a1a1a] hover:bg-neutral-800 border border-neutral-700/70 rounded-s-md">
+            <div v-if="!codeCopied" class="i-uil-clipboard" />
+            <div v-else class="i-uil-check" />
+          </button>
           <button @click="copyUrl" title="Copy link"
-            class="w-8 h-8 flex justify-center items-center text-lg text-neutral-400 hover:bg-neutral-800 border border-neutral-700/70 rounded">
-            <div v-if="!copied" class="i-uil-clipboard" />
+            class="w-10 h-10 flex justify-center items-center text-lg text-neutral-400 bg-[#1a1a1a] hover:bg-neutral-800 border border-neutral-700/70 rounded-e-md -ml-px">
+            <div v-if="!copied" class="i-uil-link" />
             <div v-else class="i-uil-check" />
           </button>
         </div>
         <textarea :value="code" @input="update" placeholder="Type something..."
-          class="block font-mono w-full h-full outline-none bg-neutral-800/20 resize-none text-neutral-200 text-xs px-4 py-3 placeholder:text-neutral-600" />
+          class="block font-mono w-full h-full outline-none bg-[#1a1a1a] resize-none text-neutral-200 text-xs px-4 py-3 placeholder:text-neutral-600" />
       </div>
       <div v-if="sidebarOpen" class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm">
-        <div class="absolute top-2 right-4">
+        <div class="absolute top-3 right-4">
           <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded" @click="sidebarOpen = false">
             <div class="i-uil-multiply text-neutral-400 text-lg" />
           </button>
