@@ -63,56 +63,77 @@ function update(event: Event) {
   shortHash.value = ""
   updateUrl(el.value)
 }
+
+const sidebarOpen = ref(false)
 </script>
 
 <template>
   <div class="flex flex-col h-full">
-    <div class="flex items-center px-4 py-3 border-b border-neutral-500/20">
-      <img src="/logo.svg" alt="Sharelinkgan" class="w-6 mr-2">
-      <span class="text-sm text-neutral-400">Sharelinkgan</span>
-    </div>
+    <navbar class="flex justify-between items-center px-4 py-2 bg-neutral-900 border-b border-neutral-700/70">
+      <div class="flex items-center">
+        <img src="/logo.svg" alt="Sharelinkgan" class="w-8 mr-2 p-0.5 bg-gray-400 rounded-full">
+        <span class="text-sm text-neutral-400">Sharelinkgan</span>
+      </div>
+      <div class="flex items-center">
+        <NuxtLink to="https://github.com/krisantuswanandi/sharelinkgan" target="_blank" class="flex justify-center items-center w-8 h-8 hover:bg-neutral-800 rounded">
+          <div class="i-uil-github text-neutral-400 text-xl"></div>
+        </NuxtLink>
+        <button class="ml-1 flex justify-center items-center w-8 h-8 hover:bg-neutral-800 rounded" @click="sidebarOpen = true">
+          <div class="i-uil-bars text-neutral-400 text-xl"></div>
+        </button>
+      </div>
+    </navbar>
     <div class="flex flex-1">
       <div class="flex-1 relative">
         <div class="absolute top-0 right-0 p-4">
           <button @click="copyUrl" title="Copy link"
-            class="w-8 h-8 flex justify-center items-center text-lg text-neutral-500 hover:bg-neutral-800 border border-neutral-300/10 rounded">
+            class="w-8 h-8 flex justify-center items-center text-lg text-neutral-400 hover:bg-neutral-800 border border-neutral-700/70 rounded">
             <div v-if="!copied" class="i-uil-clipboard" />
             <div v-else class="i-uil-check" />
           </button>
         </div>
         <textarea :value="code" @input="update" placeholder="Type something..."
-          class="block font-mono w-full h-full outline-none bg-neutral-800/20 resize-none text-neutral-300 text-xs px-4 py-2 placeholder:text-neutral-600" />
+          class="block font-mono w-full h-full outline-none bg-neutral-800/20 resize-none text-neutral-200 text-xs px-4 py-3 placeholder:text-neutral-600" />
       </div>
-      <div class="w-96 border-l border-neutral-500/20 p-4">
-        <div class="h-20">
-          <div class="font-bold tracking-wider text-xs text-neutral-600/70">URL SHORTENER</div>
+      <div v-if="sidebarOpen" class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm">
+        <div class="absolute top-2 right-4">
+          <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded" @click="sidebarOpen = false">
+            <div class="i-uil-multiply text-neutral-400 text-lg" />
+          </button>
+        </div>
+        <div class="overflow-auto bg-neutral-900 w-96 border-l border-neutral-700/70 p-4">
           <div class="mt-2">
-            <button v-if="!shortHash" @click="shorten" :disabled="canShorten"
-              class="block px-4 h-8 hover:bg-neutral-800 text-sm text-neutral-500 border border-neutral-300/10 rounded cursor-pointer">
-              Generate
-            </button>
-            <div v-else class="flex justify-center items-center gap-2 bg-neutral-600/10 p-1.5 pl-4 text-neutral-700 text-xs font-mono border-neutral-600/20 rounded">
-              <div class="flex-1 truncate">{{ shortUrl }}</div>
-              <button @click="copyUrl" title="Copy link"
-                class="shrink-0 w-8 h-8 flex justify-center items-center text-lg text-neutral-500 hover:bg-neutral-800 border border-neutral-300/10 rounded">
-                <div v-if="!copied" class="i-uil-copy" />
-                <div v-else class="i-uil-check" />
+            <div class="font-bold tracking-wider text-xs text-neutral-600">URL SHORTENER</div>
+            <div class="mt-2 h-16">
+              <button v-if="!shortHash" @click="shorten" :disabled="canShorten"
+                class="block px-4 h-8 hover:bg-neutral-800 text-sm text-neutral-400 border border-neutral-700/70 rounded cursor-pointer">
+                Generate
               </button>
+              <div v-else
+                class="flex justify-center items-center gap-2 bg-neutral-600/10 p-1.5 pl-4 text-neutral-700 text-xs font-mono border-neutral-600/20 rounded">
+                <div class="flex-1 truncate">{{ shortUrl }}</div>
+                <button @click="copyUrl" title="Copy link"
+                  class="shrink-0 w-8 h-8 flex justify-center items-center text-lg text-neutral-500 hover:bg-neutral-800 border border-neutral-300/10 rounded">
+                  <div v-if="!copied" class="i-uil-copy" />
+                  <div v-else class="i-uil-check" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="mt-2">
-          <div class="font-bold tracking-wider text-xs text-neutral-600/70">SAVED URLs</div>
-          <ClientOnly>
-            <ul v-if="savedHashes.length" class="mt-2">
-              <li v-for="hash in savedHashes">
-                <NuxtLink :to="getShortUrl(hash)" class="text-neutral-500 hover:text-neutral-400 hover:underline text-sm">
-                  {{ getShortUrl(hash) }}
-                </NuxtLink>
-              </li>
-            </ul>
-            <div v-else class="mt-12 text-center text-neutral-300/10 font-italic text-sm">No saved URLs</div>
-          </ClientOnly>
+          <div class="mt-2">
+            <div class="font-bold tracking-wider text-xs text-neutral-600">SAVED URLs</div>
+            <ClientOnly>
+              <ul v-if="savedHashes.length" class="mt-2">
+                <li v-for="hash in savedHashes">
+                  <NuxtLink :to="getShortUrl(hash)"
+                    class="text-neutral-400 hover:text-neutral-300 hover:underline text-sm">
+                    {{ getShortUrl(hash) }}
+                  </NuxtLink>
+                </li>
+              </ul>
+              <div v-else class="mt-12 text-center text-neutral-300/10 font-italic text-sm">No saved URLs</div>
+            </ClientOnly>
+          </div>
         </div>
       </div>
     </div>
