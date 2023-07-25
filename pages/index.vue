@@ -70,7 +70,7 @@ const sidebarOpen = ref(false)
 
 <template>
   <div class="flex flex-col h-full">
-    <navbar class="flex justify-between items-center px-4 py-3 bg-neutral-900 border-b border-neutral-700/70">
+    <nav class="flex justify-between items-center px-4 py-3 bg-neutral-900 border-b border-neutral-700/70">
       <div class="flex items-center">
         <img src="/logo.svg" alt="Sharelinkgan" class="w-8 mr-2 p-0.5 bg-gray-400 rounded-full">
         <span class="text-sm text-neutral-400">Sharelinkgan</span>
@@ -83,7 +83,7 @@ const sidebarOpen = ref(false)
           <div class="i-uil-bars text-neutral-400 text-xl"></div>
         </button>
       </div>
-    </navbar>
+    </nav>
     <div class="flex flex-1">
       <div class="flex-1 relative">
         <div class="absolute top-0 right-0 p-4 flex">
