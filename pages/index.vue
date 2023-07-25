@@ -101,7 +101,7 @@ const sidebarOpen = ref(false)
         <textarea :value="code" @input="update" placeholder="Type something..."
           class="block font-mono w-full h-full outline-none bg-[#1a1a1a] resize-none text-neutral-200 text-xs px-4 py-3 placeholder:text-neutral-600" />
       </div>
-      <div v-if="sidebarOpen" class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm">
+      <div v-if="sidebarOpen" class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm" @click.self="sidebarOpen = false">
         <div class="absolute top-3 right-4">
           <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded" @click="sidebarOpen = false">
             <div class="i-uil-multiply text-neutral-400 text-lg" />
