@@ -112,7 +112,7 @@ onMounted(() => {
         <div id="editor" class="bg-[#1a1a1a] h-full"></div>
       </div>
       <div v-if="sidebarOpen"
-        class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm"
+        class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm z-40"
         @click.self="sidebarOpen = false">
         <div class="absolute top-3 right-4">
           <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded"
