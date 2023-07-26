@@ -71,7 +71,7 @@ import { EditorView, basicSetup } from "codemirror"
 
 onMounted(() => {
   const editor = new EditorView({
-    extensions: [basicSetup],
+    extensions: [basicSetup, editorTheme],
     parent: document.getElementById("editor")!,
   })
 })
