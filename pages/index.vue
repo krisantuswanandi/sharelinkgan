@@ -168,4 +168,9 @@ body,
 
 body {
   --at-apply: bg-neutral-900 font-sans;
-}</style>
+}
+
+.cm-editor .cm-scroller {
+  --at-apply: font-mono text-xs;
+}
+</style>

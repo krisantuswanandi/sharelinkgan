@@ -1,98 +1,74 @@
 import { EditorView } from "@codemirror/view";
 
-const foreground = "#d4cfbf80";
-const lineNumber = "#dedcd530";
-const darkBackground = "#1a1a1a";
-const highlightBackground = "#4d4d4d29";
+const foreground = "#d4d4d4";
 const background = "#1a1a1a";
-const tooltipBackground = "#242222";
-const selection = "#242424";
-const cursor = "#888";
 
 export const editorTheme = EditorView.theme(
   {
     "&": {
       color: foreground,
       backgroundColor: background,
+      height: "100%",
     },
     "& div": {
       flexDirection: "initial",
     },
-
     "&.cm-focused": {
       outline: "none",
     },
-
-    ".cm-content": {
-      caretColor: cursor,
-    },
-
     ".cm-completionIcon": {
       display: "none",
     },
-
-    ".cm-cursor, .cm-dropCursor": { borderLeftColor: cursor },
+    ".cm-cursor, .cm-dropCursor": {
+      borderLeftColor: "#d4d4d4",
+    },
     "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-      { backgroundColor: selection },
-
-    ".cm-panels": { backgroundColor: darkBackground, color: foreground },
-    ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-    ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
-
+      {
+        backgroundColor: "#6663 !important",
+      },
+    ".cm-panels": {
+      backgroundColor: background,
+      color: "#a3a3a3",
+    },
+    ".cm-panels.cm-panels-top": {
+      borderBottom: "1px solid #404040b3",
+    },
+    ".cm-panels.cm-panels-bottom": {
+      borderTop: "1px solid #404040b3",
+    },
+    ".cm-button": {
+      background: "none",
+      border: "1px solid #404040b3",
+      borderRadius: "0.25rem",
+    },
+    ".cm-button:hover": {
+      background: "#262626",
+    },
     ".cm-searchMatch": {
-      backgroundColor: "#72a1ff59",
-      outline: "1px solid #457dff",
+      backgroundColor: "#4444",
+      outline: "1px solid #777",
     },
     ".cm-searchMatch.cm-searchMatch-selected": {
-      backgroundColor: "#6199ff2f",
+      backgroundColor: "#8888",
     },
-
-    ".cm-line": { border: "1px solid transparent" },
+    ".cm-line": {
+      border: "1px solid transparent",
+    },
     ".cm-activeLine": {
-      backgroundColor: highlightBackground,
-      border: "1px solid #242424",
+      backgroundColor: "#6661",
+      border: "1px solid #6665",
     },
-    ".cm-selectionMatch": { backgroundColor: "#aafe661a" },
-
-    "&.cm-focused .cm-matchingBracket, &.cm-focused .cm-nonmatchingBracket": {
-      backgroundColor: "transparent",
+    ".cm-selectionMatch": {
+      backgroundColor: "#8888",
     },
-
     ".cm-gutters": {
       backgroundColor: background,
-      color: lineNumber,
+      color: "#a3a3a355",
       border: "none",
     },
-
     ".cm-activeLineGutter": {
       backgroundColor: "transparent",
-      color: "#bfbaaa",
-    },
-
-    ".cm-foldPlaceholder": {
-      backgroundColor: "transparent",
-      border: "none",
-      color: "#ddd",
-    },
-
-    ".cm-tooltip": {
-      border: "none",
-      backgroundColor: tooltipBackground,
-      color: "#c2beb3",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:before": {
-      borderTopColor: "transparent",
-      borderBottomColor: "transparent",
-    },
-    ".cm-tooltip .cm-tooltip-arrow:after": {
-      borderTopColor: tooltipBackground,
-      borderBottomColor: tooltipBackground,
-    },
-    ".cm-tooltip-autocomplete": {
-      "& > ul > li[aria-selected]": {
-        backgroundColor: "#ffffff14",
-        color: "#c2beb3",
-      },
+      color: "#a3a3a3",
     },
   },
   { dark: true }
