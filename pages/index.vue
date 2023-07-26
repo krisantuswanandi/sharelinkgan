@@ -44,7 +44,7 @@ async function shorten() {
     method: "post",
     body: {
       hash: utoa(code.value),
-    }
+    },
   })
 
   if (data.value) {
@@ -58,11 +58,10 @@ const updateUrl = useDebounceFn((text: string) => {
   router.push({ hash })
 }, 500)
 
-function update(event: Event) {
-  const el = event.target as HTMLTextAreaElement
-  code.value = el.value
+function update(value: string) {
+  code.value = value
   shortHash.value = ""
-  updateUrl(el.value)
+  updateUrl(value)
 }
 
 const sidebarOpen = ref(false)
@@ -70,8 +69,17 @@ const sidebarOpen = ref(false)
 import { EditorView, basicSetup } from "codemirror"
 
 onMounted(() => {
-  const editor = new EditorView({
-    extensions: [basicSetup, editorTheme],
+  new EditorView({
+    doc: code.value,
+    extensions: [
+      basicSetup,
+      editorTheme,
+      EditorView.updateListener.of(e => {
+        if (e.docChanged) {
+          update(e.state.doc.toString())
+        }
+      }),
+    ],
     parent: document.getElementById("editor")!,
   })
 })
