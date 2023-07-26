@@ -67,6 +67,7 @@ function update(value: string) {
 const sidebarOpen = ref(false)
 
 import { EditorView, basicSetup } from "codemirror"
+import { json } from "@codemirror/lang-json"
 
 onMounted(() => {
   new EditorView({
@@ -74,6 +75,7 @@ onMounted(() => {
     extensions: [
       basicSetup,
       editorTheme,
+      json(),
       EditorView.updateListener.of(e => {
         if (e.docChanged) {
           update(e.state.doc.toString())

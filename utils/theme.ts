@@ -1,9 +1,11 @@
 import { EditorView } from "@codemirror/view";
+import { HighlightStyle, syntaxHighlighting } from "@codemirror/language";
+import { tags } from "@lezer/highlight";
 
 const foreground = "#d4d4d4";
 const background = "#1a1a1a";
 
-export const editorTheme = EditorView.theme(
+const editorView = EditorView.theme(
   {
     "&": {
       color: foreground,
@@ -70,6 +72,38 @@ export const editorTheme = EditorView.theme(
       backgroundColor: "transparent",
       color: "#a3a3a3",
     },
+    ".cm-foldPlaceholder": {
+      backgroundColor: "transparent",
+      border: "none",
+      color: foreground,
+    },
   },
   { dark: true }
 );
+
+const syntaxHighlight = syntaxHighlighting(
+  HighlightStyle.define([
+    {
+      tag: tags.name,
+      color: "#bae2ff",
+    },
+    {
+      tag: tags.brace,
+      color: "#ffee84",
+    },
+    {
+      tag: tags.number,
+      color: "#aed799",
+    },
+    {
+      tag: [tags.bool, tags.keyword],
+      color: "#47a2ff",
+    },
+    {
+      tag: tags.string,
+      color: "#ce9178",
+    },
+  ])
+);
+
+export const editorTheme = [editorView, syntaxHighlight]
