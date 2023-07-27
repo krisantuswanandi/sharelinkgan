@@ -106,7 +106,7 @@ onMounted(() => {
         </button>
       </div>
     </nav>
-    <div class="flex flex-1">
+    <div class="flex flex-1 overflow-hidden">
       <div class="flex-1 relative">
         <div class="absolute top-0 right-0 p-4 flex z-10">
           <button @click="copyCode()" title="Copy source code"
@@ -122,50 +122,55 @@ onMounted(() => {
         </div>
         <div id="editor" class="bg-[#1a1a1a] h-full"></div>
       </div>
-      <div v-if="sidebarOpen"
-        class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm z-40"
-        @click.self="sidebarOpen = false">
-        <div class="absolute top-3 right-4">
-          <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded"
-            @click="sidebarOpen = false">
-            <div class="i-uil-multiply text-neutral-400 text-lg" />
-          </button>
+      <Transition name="fade">
+        <div v-if="sidebarOpen" class="fixed inset-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm z-30"
+          @click="sidebarOpen = false">
         </div>
-        <div class="overflow-auto bg-neutral-900 w-96 border-l border-neutral-700/70 p-4">
-          <div class="mt-2">
-            <div class="font-bold tracking-wider text-xs text-neutral-600">URL SHORTENER</div>
-            <div class="mt-2 h-16">
-              <button v-if="!shortHash" @click="shorten" :disabled="canShorten"
-                class="block px-4 h-8 hover:bg-neutral-800 text-sm text-neutral-400 border border-neutral-700/70 rounded cursor-pointer">
-                Generate
-              </button>
-              <div v-else
-                class="flex justify-center items-center gap-2 bg-neutral-600/10 p-1.5 pl-4 text-neutral-700 text-xs font-mono border-neutral-600/20 rounded">
-                <div class="flex-1 truncate">{{ shortUrl }}</div>
-                <button @click="copyUrl" title="Copy link"
-                  class="shrink-0 w-8 h-8 flex justify-center items-center text-lg text-neutral-500 hover:bg-neutral-800 border border-neutral-300/10 rounded">
-                  <div v-if="!copied" class="i-uil-copy" />
-                  <div v-else class="i-uil-check" />
+      </Transition>
+      <Transition name="slide">
+        <div v-if="sidebarOpen" class="fixed top-0 right-0 w-96 h-full z-40">
+          <div class="absolute top-3 right-4">
+            <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded"
+              @click="sidebarOpen = false">
+              <div class="i-uil-multiply text-neutral-400 text-lg" />
+            </button>
+          </div>
+          <div class="overflow-auto h-full bg-neutral-900 border-l border-neutral-700/70 p-4">
+            <div class="mt-2">
+              <div class="font-bold tracking-wider text-xs text-neutral-600">URL SHORTENER</div>
+              <div class="mt-2 h-16">
+                <button v-if="!shortHash" @click="shorten" :disabled="canShorten"
+                  class="block px-4 h-8 hover:bg-neutral-800 text-sm text-neutral-400 border border-neutral-700/70 rounded cursor-pointer">
+                  Generate
                 </button>
+                <div v-else
+                  class="flex justify-center items-center gap-2 bg-neutral-600/10 p-1.5 pl-4 text-neutral-700 text-xs font-mono border-neutral-600/20 rounded">
+                  <div class="flex-1 truncate">{{ shortUrl }}</div>
+                  <button @click="copyUrl" title="Copy link"
+                    class="shrink-0 w-8 h-8 flex justify-center items-center text-lg text-neutral-500 hover:bg-neutral-800 border border-neutral-300/10 rounded">
+                    <div v-if="!copied" class="i-uil-copy" />
+                    <div v-else class="i-uil-check" />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="mt-2">
-            <div class="font-bold tracking-wider text-xs text-neutral-600">SAVED URLs</div>
-            <ClientOnly>
-              <ul v-if="savedHashes.length" class="mt-2">
-                <li v-for="hash in savedHashes">
-                  <NuxtLink :to="getShortUrl(hash)"
-                    class="text-neutral-400 hover:text-neutral-300 hover:underline text-sm">
-                    {{ getShortUrl(hash) }}
-                  </NuxtLink>
-                </li>
-              </ul>
-              <div v-else class="mt-12 text-center text-neutral-300/10 font-italic text-sm">No saved URLs</div>
-            </ClientOnly>
+            <div class="mt-2">
+              <div class="font-bold tracking-wider text-xs text-neutral-600">SAVED URLs</div>
+              <ClientOnly>
+                <ul v-if="savedHashes.length" class="mt-2">
+                  <li v-for="hash in savedHashes">
+                    <NuxtLink :to="getShortUrl(hash)"
+                      class="text-neutral-400 hover:text-neutral-300 hover:underline text-sm">
+                      {{ getShortUrl(hash) }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+                <div v-else class="mt-12 text-center text-neutral-300/10 font-italic text-sm">No saved URLs</div>
+              </ClientOnly>
+            </div>
           </div>
         </div>
-      </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -183,5 +188,25 @@ body {
 
 .cm-editor .cm-scroller {
   --at-apply: font-mono text-xs;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  --at-apply: transition-opacity duration-300;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  --at-apply: opacity-0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  --at-apply: transition-transform duration-300;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  --at-apply: translate-x-full;
 }
 </style>
