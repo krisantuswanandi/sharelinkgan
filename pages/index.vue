@@ -76,6 +76,7 @@ onMounted(() => {
       basicSetup,
       editorTheme,
       json(),
+      EditorView.lineWrapping,
       EditorView.updateListener.of(e => {
         if (e.docChanged) {
           update(e.state.doc.toString())
