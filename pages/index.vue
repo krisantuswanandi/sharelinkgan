@@ -44,7 +44,7 @@ async function shorten() {
     method: "post",
     body: {
       hash: utoa(code.value),
-    }
+    },
   })
 
   if (data.value) {
@@ -58,14 +58,34 @@ const updateUrl = useDebounceFn((text: string) => {
   router.push({ hash })
 }, 500)
 
-function update(event: Event) {
-  const el = event.target as HTMLTextAreaElement
-  code.value = el.value
+function update(value: string) {
+  code.value = value
   shortHash.value = ""
-  updateUrl(el.value)
+  updateUrl(value)
 }
 
 const sidebarOpen = ref(false)
+
+import { EditorView, basicSetup } from "codemirror"
+import { json } from "@codemirror/lang-json"
+
+onMounted(() => {
+  new EditorView({
+    doc: code.value,
+    extensions: [
+      basicSetup,
+      editorTheme,
+      json(),
+      EditorView.lineWrapping,
+      EditorView.updateListener.of(e => {
+        if (e.docChanged) {
+          update(e.state.doc.toString())
+        }
+      }),
+    ],
+    parent: document.getElementById("editor")!,
+  })
+})
 </script>
 
 <template>
@@ -88,7 +108,7 @@ const sidebarOpen = ref(false)
     </nav>
     <div class="flex flex-1">
       <div class="flex-1 relative">
-        <div class="absolute top-0 right-0 p-4 flex">
+        <div class="absolute top-0 right-0 p-4 flex z-10">
           <button @click="copyCode()" title="Copy source code"
             class="w-10 h-10 flex justify-center items-center text-lg text-neutral-400 bg-[#1a1a1a] hover:bg-neutral-800 border border-neutral-700/70 rounded-s-md">
             <div v-if="!codeCopied" class="i-uil-clipboard" />
@@ -100,11 +120,10 @@ const sidebarOpen = ref(false)
             <div v-else class="i-uil-check" />
           </button>
         </div>
-        <textarea :value="code" @input="update" placeholder="Type something..."
-          class="block font-mono w-full h-full outline-none bg-[#1a1a1a] resize-none text-neutral-200 text-xs px-4 py-3 placeholder:text-neutral-600" />
+        <div id="editor" class="bg-[#1a1a1a] h-full"></div>
       </div>
       <div v-if="sidebarOpen"
-        class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm"
+        class="fixed top-0 left-0 right-0 bottom-0 flex justify-end bg-neutral-900/50 backdrop-blur-sm z-40"
         @click.self="sidebarOpen = false">
         <div class="absolute top-3 right-4">
           <button class="w-8 h-8 flex justify-center items-center bg-neutral-900 hover:bg-neutral-800 rounded"
@@ -160,4 +179,9 @@ body,
 
 body {
   --at-apply: bg-neutral-900 font-sans;
-}</style>
+}
+
+.cm-editor .cm-scroller {
+  --at-apply: font-mono text-xs;
+}
+</style>
