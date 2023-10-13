@@ -1,10 +1,9 @@
-import { InferModel } from "drizzle-orm";
-import { mysqlTable, serial, text, varchar } from "drizzle-orm/mysql-core";
+import { InferSelectModel } from "drizzle-orm";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const url = mysqlTable("url", {
-  id: serial("id").primaryKey(),
-  hash: varchar("hash", { length: 10 }).unique(),
-  original: text("original"),
+export const url = sqliteTable("url", {
+  hash: text("hash").primaryKey(),
+  original: text("original").notNull(),
 });
 
-export type Url = InferModel<typeof url, "select">;
+export type Url = InferSelectModel<typeof url>;

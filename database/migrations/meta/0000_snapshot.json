@@ -1,48 +1,34 @@
 {
   "version": "5",
-  "dialect": "mysql",
-  "id": "a9e60386-e266-4f95-a43f-f1fdd490b022",
+  "dialect": "sqlite",
+  "id": "87afbb3f-1db9-4f90-a0d9-28ddb371089d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "url": {
       "name": "url",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
         "hash": {
           "name": "hash",
-          "type": "varchar(10)",
-          "primaryKey": false,
-          "notNull": false,
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
           "autoincrement": false
         },
         "original": {
           "name": "original",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "url_hash_unique": {
-          "name": "url_hash_unique",
-          "columns": [
-            "hash"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     }
   },
-  "schemas": {},
+  "enums": {},
   "_meta": {
     "schemas": {},
     "tables": {},

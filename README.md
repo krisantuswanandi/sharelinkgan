@@ -10,13 +10,13 @@ Built with [Nuxt 3](https://nuxt.com). Click [here](https://nuxt.com/docs/gettin
 
 Copy `.env.example` file into `.env` and fill the variables.
 
-Create a new database on [PlanetScale](https://planetscale.com/) and fill the database env variables with your credentials.
+Create a new database on [Turso](https://turso.tech/) and fill the database env variables with your credentials.
 
-Install proejct dependencies by running `npm install`.
+Install proejct dependencies by running `bun install`.
 
-Update your database schema by running `npm run db:push`.
+Update your database schema by running `bun run db:push`.
 
-Finally, start the dev server by running `npm run dev`.
+Finally, start the dev server by running `bun run dev`.
 
 ## License
 

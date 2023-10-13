@@ -4,9 +4,7 @@ export default defineNuxtConfig({
   modules: ["@unocss/nuxt", "@vueuse/nuxt"],
   runtimeConfig: {
     databaseUrl: "",
-    databaseHost: "",
-    databaseUsername: "",
-    databasePassword: "",
+    databaseAuthToken: "",
   },
   css: ["@unocss/reset/tailwind.css"],
 });

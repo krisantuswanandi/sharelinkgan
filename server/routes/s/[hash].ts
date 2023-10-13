@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db, schema } from "@/database";
-import { Url } from "../../../database/schema";
+import { Url } from "@/database/schema";
 
 export default defineEventHandler(async (event) => {
   const hash = event.context.params?.hash;

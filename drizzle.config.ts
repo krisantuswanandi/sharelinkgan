@@ -5,8 +5,9 @@ dotenv.config();
 export default {
   schema: "./database/schema.ts",
   out: "./database/migrations",
-  driver: "mysql2",
+  driver: "turso",
   dbCredentials: {
-    connectionString: process.env.NUXT_DATABASE_URL!,
+    url: process.env.NUXT_DATABASE_URL!,
+    authToken: process.env.NUXT_DATABASE_AUTH_TOKEN,
   },
 } satisfies Config;
