@@ -106,4 +106,4 @@ const syntaxHighlight = syntaxHighlighting(
   ])
 );
 
-export const editorTheme = [editorView, syntaxHighlight]
+export const editorTheme = [editorView, syntaxHighlight];
