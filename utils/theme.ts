@@ -25,9 +25,9 @@ const editorView = EditorView.theme(
       borderLeftColor: "#d4d4d4",
     },
     "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-      {
-        backgroundColor: "#6663 !important",
-      },
+    {
+      backgroundColor: "#6663 !important",
+    },
     ".cm-panels": {
       backgroundColor: background,
       color: "#a3a3a3",
@@ -102,6 +102,10 @@ const syntaxHighlight = syntaxHighlighting(
     {
       tag: tags.string,
       color: "#ce9178",
+    },
+    {
+      tag: tags.typeName,
+      color: "red",
     },
   ])
 );
