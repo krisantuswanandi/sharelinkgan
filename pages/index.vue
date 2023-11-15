@@ -5,6 +5,7 @@ const route = useRoute();
 useHead({ title: "Sharelinkgan" });
 
 const code = ref("");
+const lang = ref("");
 
 const updateUrl = useDebounceFn((text: string) => {
   const hash = "#" + utoa(text);
@@ -31,8 +32,8 @@ function copyUrl() {
 const drawerOpen = ref(false);
 const shortenerOpen = ref(false);
 
-function changeLanguage(value: string) {
-  console.log("change language", value);
+function changeLanguage(val: string) {
+  lang.value = val;
 }
 </script>
 
@@ -47,7 +48,7 @@ function changeLanguage(value: string) {
     />
     <div class="flex flex-1 overflow-hidden">
       <div class="flex-1 relative">
-        <CodeEditor v-model="code" />
+        <LazyCodeEditor v-model="code" :lang="lang" />
       </div>
       <AppDrawer :active="drawerOpen" @close="drawerOpen = false" />
     </div>

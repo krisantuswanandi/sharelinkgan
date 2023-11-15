@@ -1,1 +1,1 @@
-export const STORAGE_KEY = "saved-hashes";
+export const STORAGE_KEY = "sharelinkgan";
