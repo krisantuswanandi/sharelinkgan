@@ -5,6 +5,20 @@ import { tags } from "@lezer/highlight";
 const foreground = "#d4d4d4";
 const background = "#1a1a1a";
 
+const highlightColors = {
+  blue: "#569cd6",
+  darkBlue: "#569cd6",
+  lightBlue: "#9cdcfe",
+  purple: "#c586c0",
+  gray: "#808080",
+  yellow: "#dcdcaa",
+  lightGreen: "#b5cea8",
+  bluerGreen: "#4ec9b0",
+  green: "#6a9955",
+  orange: "#ce9178",
+  lightOrange: "#d7ba7d",
+};
+
 const editorView = EditorView.theme(
   {
     "&": {
@@ -25,9 +39,9 @@ const editorView = EditorView.theme(
       borderLeftColor: "#d4d4d4",
     },
     "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection":
-    {
-      backgroundColor: "#6663 !important",
-    },
+      {
+        backgroundColor: "#6663 !important",
+      },
     ".cm-panels": {
       backgroundColor: background,
       color: "#a3a3a3",
@@ -84,28 +98,58 @@ const editorView = EditorView.theme(
 const syntaxHighlight = syntaxHighlighting(
   HighlightStyle.define([
     {
-      tag: tags.name,
-      color: "#bae2ff",
-    },
-    {
-      tag: tags.brace,
+      tag: [tags.brace],
       color: "#ffee84",
     },
     {
+      tag: [tags.paren],
+      color: "#679ad1",
+    },
+    {
+      tag: [tags.squareBracket],
+      color: "#bc89bd",
+    },
+    {
       tag: tags.number,
-      color: "#aed799",
+      color: highlightColors.lightGreen,
     },
     {
-      tag: [tags.bool, tags.keyword],
-      color: "#47a2ff",
-    },
-    {
-      tag: tags.string,
-      color: "#ce9178",
+      tag: [tags.string, tags.attributeValue, tags.monospace],
+      color: highlightColors.orange,
     },
     {
       tag: tags.typeName,
-      color: "red",
+      color: highlightColors.bluerGreen,
+    },
+    {
+      tag: tags.comment,
+      color: highlightColors.green,
+    },
+    {
+      tag: [tags.function(tags.variableName), tags.propertyName, tags.keyword],
+      color: highlightColors.purple,
+    },
+    {
+      tag: [
+        tags.definitionKeyword,
+        tags.tagName,
+        tags.bool,
+        tags.documentMeta,
+        tags.heading,
+      ],
+      color: highlightColors.darkBlue,
+    },
+    {
+      tag: [tags.attributeName, tags.name, tags.propertyName],
+      color: highlightColors.lightBlue,
+    },
+    {
+      tag: tags.angleBracket,
+      color: highlightColors.gray,
+    },
+    {
+      tag: tags.className,
+      color: highlightColors.lightOrange,
     },
   ])
 );

@@ -18,8 +18,12 @@ function onInput(e: Event) {
       @input="onInput"
     >
       <option value="json">JSON</option>
+      <option value="vue">Vue</option>
       <option value="javascript">Javascript</option>
-      <option value="ruby">Ruby</option>
+      <option value="html">HTML</option>
+      <option value="css">CSS</option>
+      <option value="sql">SQL</option>
+      <option value="markdown">Markdown</option>
     </select>
   </div>
 </template>
