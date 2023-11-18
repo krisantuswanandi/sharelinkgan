@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  code: string;
+  hash: string;
 }>();
 
 const emit = defineEmits<{
@@ -24,7 +24,7 @@ async function shorten() {
   const { data } = await useFetch<{ hash: string }>("/api/urls", {
     method: "post",
     body: {
-      hash: utoa(props.code),
+      hash: props.hash,
     },
   });
 

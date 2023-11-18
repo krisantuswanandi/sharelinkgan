@@ -34,6 +34,21 @@ onMounted(() => {
 });
 
 watch(
+  () => props.modelValue,
+  (val) => {
+    if (!editor) return;
+
+    editor.dispatch({
+      changes: {
+        from: 0,
+        to: editor.state.doc.length,
+        insert: val,
+      },
+    });
+  }
+);
+
+watch(
   () => props.lang,
   async (val) => {
     if (!editor) return;

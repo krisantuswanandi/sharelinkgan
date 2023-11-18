@@ -1,10 +1,16 @@
 <script setup lang="ts">
-const emit = defineEmits<{ (e: "select", value: string): void }>();
+defineProps<{
+  modelValue: string;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
 
 function onInput(e: Event) {
   const value = (e.target as HTMLSelectElement).value;
 
-  emit("select", value);
+  emit("update:modelValue", value);
 }
 </script>
 
@@ -15,6 +21,7 @@ function onInput(e: Event) {
     />
     <select
       class="appearance-none pl-2 pr-8 py-1 mr-2 bg-transparent border border-neutral-700 rounded-md text-xs text-neutral-400 outline-none hover:border-neutral-500 focus:border-neutral-500"
+      :value="modelValue"
       @input="onInput"
     >
       <option value="json">JSON</option>
