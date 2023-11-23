@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { EditorView, basicSetup } from "codemirror";
 import { Compartment } from "@codemirror/state";
+import { keymap } from "@codemirror/view";
+import { indentWithTab } from "@codemirror/commands";
 import { json } from "@codemirror/lang-json";
 
 const props = defineProps<{
@@ -22,6 +24,7 @@ onMounted(() => {
       basicSetup,
       editorTheme,
       language.of(json()),
+      keymap.of([indentWithTab]),
       EditorView.lineWrapping,
       EditorView.updateListener.of((e) => {
         if (e.docChanged) {
@@ -36,7 +39,7 @@ onMounted(() => {
 watch(
   () => props.modelValue,
   (val) => {
-    if (!editor) return;
+    if (!editor || val === editor.state.doc.toString()) return;
 
     editor.dispatch({
       changes: {
