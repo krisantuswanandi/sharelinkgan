@@ -4,6 +4,8 @@ const route = useRoute();
 
 useHead({ title: "Sharelinkgan" });
 
+useFetch("/api/cold-start");
+
 const code = ref("");
 const lang = ref("json");
 
