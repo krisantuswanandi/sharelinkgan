@@ -4,10 +4,11 @@ import { Compartment } from "@codemirror/state";
 import { keymap } from "@codemirror/view";
 import { indentWithTab } from "@codemirror/commands";
 import { json } from "@codemirror/lang-json";
+import type { SupportedLanguage } from "~/utils/language";
 
 const props = defineProps<{
   modelValue: string;
-  lang: string;
+  lang: SupportedLanguage;
 }>();
 
 const emit = defineEmits<{
@@ -56,54 +57,11 @@ watch(
   async (val) => {
     if (!editor) return;
 
-    if (val === "vue") {
-      const { vue } = await import("@codemirror/lang-vue");
+    const lang = await getLanguageExtension(val);
 
-      editor.dispatch({
-        effects: language.reconfigure(vue()),
-      });
-    } else if (val === "javascript") {
-      const { javascript } = await import("@codemirror/lang-javascript");
-
-      editor.dispatch({
-        effects: language.reconfigure(
-          javascript({
-            jsx: true,
-            typescript: true,
-          })
-        ),
-      });
-    } else if (val === "html") {
-      const { html } = await import("@codemirror/lang-html");
-
-      editor.dispatch({
-        effects: language.reconfigure(html()),
-      });
-    } else if (val === "css") {
-      const { css } = await import("@codemirror/lang-css");
-
-      editor.dispatch({
-        effects: language.reconfigure(css()),
-      });
-    } else if (val === "sql") {
-      const { sql } = await import("@codemirror/lang-sql");
-
-      editor.dispatch({
-        effects: language.reconfigure(sql()),
-      });
-    } else if (val === "markdown") {
-      const { markdown } = await import("@codemirror/lang-markdown");
-
-      editor.dispatch({
-        effects: language.reconfigure(markdown()),
-      });
-    } else {
-      const { javascript } = await import("@codemirror/lang-javascript");
-
-      editor.dispatch({
-        effects: language.reconfigure(javascript()),
-      });
-    }
+    editor.dispatch({
+      effects: language.reconfigure(lang),
+    });
   }
 );
 </script>

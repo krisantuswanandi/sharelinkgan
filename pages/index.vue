@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { SupportedLanguage } from "~/utils/language";
+
 const router = useRouter();
 const route = useRoute();
 
@@ -7,7 +9,7 @@ useHead({ title: "Sharelinkgan" });
 useFetch("/api/cold-start");
 
 const code = ref("");
-const lang = ref("json");
+const lang = ref<SupportedLanguage>("json");
 
 const updateHash = useDebounceFn(() => {
   const text = JSON.stringify({

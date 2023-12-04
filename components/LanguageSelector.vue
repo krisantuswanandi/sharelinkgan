@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import type { SupportedLanguage } from "~/utils/language";
+
 defineProps<{
-  modelValue: string;
+  modelValue: SupportedLanguage;
 }>();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
 }>();
+
+const options = supportedLanguages;
 
 function onInput(e: Event) {
   const value = (e.target as HTMLSelectElement).value;
@@ -24,13 +28,9 @@ function onInput(e: Event) {
       :value="modelValue"
       @input="onInput"
     >
-      <option value="json">JSON</option>
-      <option value="vue">Vue</option>
-      <option value="javascript">Javascript</option>
-      <option value="html">HTML</option>
-      <option value="css">CSS</option>
-      <option value="sql">SQL</option>
-      <option value="markdown">Markdown</option>
+      <option v-for="option in options" :key="option.id" :value="option.id">
+        {{ option.name }}
+      </option>
     </select>
   </div>
 </template>
