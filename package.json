@@ -33,6 +33,7 @@
     "@codemirror/lang-sql": "^6.5.4",
     "@codemirror/lang-vue": "^0.1.2",
     "@codemirror/language": "^6.9.1",
+    "@codemirror/legacy-modes": "^6.3.3",
     "@codemirror/state": "^6.2.1",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@codemirror/view": "^6.22.1",

@@ -1,6 +1,9 @@
+import { StreamLanguage } from "@codemirror/language";
+
 export const supportedLanguages = [
   { id: "json", name: "JSON" },
   { id: "vue", name: "Vue" },
+  { id: "ruby", name: "Ruby" },
   { id: "javascript", name: "Javascript" },
   { id: "html", name: "HTML" },
   { id: "css", name: "CSS" },
@@ -32,6 +35,10 @@ export async function getLanguageExtension(val: SupportedLanguage) {
     case "markdown":
       const { markdown } = await import("@codemirror/lang-markdown");
       return markdown();
+
+    case "ruby":
+      const { ruby } = await import("@codemirror/legacy-modes/mode/ruby");
+      return StreamLanguage.define(ruby);
 
     default:
       const { javascript } = await import("@codemirror/lang-javascript");
