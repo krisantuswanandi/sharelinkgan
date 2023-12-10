@@ -1,0 +1,1 @@
+ALTER TABLE url ADD `created_at` integer NOT NULL;

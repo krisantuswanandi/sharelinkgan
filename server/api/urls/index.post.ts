@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
     await db.insert(schema.url).values({
       hash,
       original: body.hash,
+      createdAt: new Date().toISOString(),
     });
     return { hash };
   } catch (error) {
