@@ -7,7 +7,7 @@ const route = useRoute();
 useHead({ title: "Sharelinkgan" });
 
 onMounted(() => {
-  useFetch("/api/cold-start");
+  $fetch("/api/cold-start");
 });
 
 const code = ref("");

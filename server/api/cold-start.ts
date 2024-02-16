@@ -16,5 +16,5 @@ export default defineCachedEventHandler(
       });
     }
   },
-  { maxAge: 5 * 60 } // ignore for 5 minutes
+  { maxAge: 2 * 60 } // ignore for 2 minutes
 );
