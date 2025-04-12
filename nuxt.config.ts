@@ -12,4 +12,5 @@ export default defineNuxtConfig({
     databaseAuthToken: "",
   },
   css: ["@unocss/reset/tailwind.css"],
+  compatibilityDate: "2025-04-12",
 });
